@@ -18,7 +18,7 @@ myTracker — Мультиплатформенная система аналит
 ### Минимальные требования
 
 #### Android
-* Android api level 14 (Android 4.0)
+* Android api level 21 (Android 5.0)
 * Разрешение `android.permission.INTERNET`
 * Разрешение `android.permission.ACCESS_NETWORK_STATE`
 
@@ -27,7 +27,7 @@ myTracker — Мультиплатформенная система аналит
 * [Google Play Install Referrer](https://developer.android.com/google/play/installreferrer) (модуль com.android.installreferrer:installreferrer)
 
 #### iOS
-* Минимальная поддерживаемая версия iOS - 9.0
+* Минимальная поддерживаемая версия iOS - 12.4
 * xCode версия 12.4 или выше
 
 В случае, если необходимо получение информации об IDFA/IDFV на iOS 14+, то необходимо получение разрешения от пользователя.  
