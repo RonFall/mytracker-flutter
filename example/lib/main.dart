@@ -5,9 +5,14 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Инициализация MyTracker
-  const sdkKey = '';
+  const sdkKey = '53362303610112658767';
+  await MyTracker.setDebugMode(true);
+  await MyTracker.trackerConfig.setBufferingPeriod(5);
   await MyTracker.init(sdkKey);
-
+  await MyTracker.trackEvent(
+    'TestEventiOS',
+    {'name': 'testios'},
+  );
   runApp(const MyApp());
 }
 
