@@ -63,8 +63,8 @@ dependencies:
 
 ```dart
 // При необходимости настраиваем параметры
-MyTrackerParams trackerParams = await MyTracker.getTrackerParams();
-MyTrackerParams trackerConfig = await MyTracker.getTrackerConfig();
+final trackerParams = await MyTracker.trackerParams;
+final trackerConfig = await MyTracker.trackerConfig;
 
 // ...
 // Настройка параметров трекера
@@ -77,59 +77,53 @@ await MyTracker.init(SDK_KEY);
 
 ### Доступные для настройки параметры
 
-Конфигурацию трекера можно произвести через экземпляр класса `MyTrackerConfig`, доступный через метод `MyTracker.getTrackerConfig()`.  
-Параметры трекера можно настроить через экземпляр класса `MyTrackerParams`, который доступен через метод `MyTracker.getTrackerParams()`.
+Конфигурацию трекера можно произвести через экземпляр класса `MyTrackerConfig`, доступный через метод `MyTracker.trackerConfig`.  
+Параметры трекера можно настроить через экземпляр класса `MyTrackerParams`, который доступен через метод `MyTracker.trackerParams`.
 
 #### MyTrackerConfig
 Экземпляр данного класса отвечает за конфигурацию трекера и предоставляет следующие методы.
 
-```dart
-Future<MyTrackerConfig> setTrackingLaunchEnabled(boolean trackingLaunchEnabled)
-```
 Отслеживание запусков приложения. По умолчанию true.
-
 ```dart
-Future<MyTrackerConfig> setLaunchTimeout(int seconds)
+Future<void> setTrackingLaunchEnabled(boolean trackingLaunchEnabled)
 ```
+
 Интервал в секундах, в течение которого не будет засчитываться новый запуск и прерываться сессия при сворачивании приложения.  
 По умолчанию 30 секунд. Можно установить значение в диапазоне 30-7200 секунд.
-
 ```dart
-Future<MyTrackerConfig> setBufferingPeriod(int seconds)
+Future<void> setLaunchTimeout(int seconds)
 ```
+
 Интервал в секундах, в течение которого события будут накапливаться на устройстве перед отправкой на сервер.  
 По умолчанию 900 секунд. Можно установить значение в диапазоне 1-86400 секунд.
-
 ```dart
-Future<MyTrackerConfig> setForcingPeriod(int seconds)
+Future<void> setBufferingPeriod(int seconds)
 ```
+
 Интервал в секундах после установки или обновления приложения, в течение которого события будут незамедлительно отправляться на сервер.  
 По умолчанию 0 секунд (незамедлительная отправка выключена). Можно установить значение в диапазоне 0-432000 секунд (5 суток).
-
 ```dart
-Future<MyTrackerConfig> setAutotrackingPurchaseEnabled(boolean autotrackingPurchaseEnabled)
+Future<void> setForcingPeriod(int seconds)
 ```
-Автоматическое отслеживание покупок в приложении.  
-По умолчанию true.
 
+Отслеживание местоположения.  
+По умолчанию true.
 ```dart
 Future<MyTrackerConfig> setTrackingLocationEnabled(boolean trackingLocationEnabled)
 ```
-Отслеживание местоположения.  
-По умолчанию true.
 
-```dart
-Future<MyTrackerConfig> setRegion(MyTrackerRegion region)
-```
 Установка региона сервера приёма данных.   
 Доступные значения:
 * MyTrackerRegion.EU - Европа.
 * MyTrackerRegion.RU - РФ.
+```dart
+Future<MyTrackerConfig> setRegion(MyTrackerRegion region)
+```
 
+Установка прокси-хоста сервера приёма данных.
 ```dart
 Future<MyTrackerConfig> setProxyHost(@Nullable String proxyHost)
 ```
-Установка прокси-хоста сервера приёма данных.
 
 #### MyTrackerParams
 Экземпляр данного класса предназначен для настройки пользовательских параметров.
@@ -139,7 +133,7 @@ Future<MyTrackerConfig> setProxyHost(@Nullable String proxyHost)
 ```dart 
 Future setUserInfo() async
 {
-    MyTrackerParams trackerParams = await MyTracker.getTrackerParams();
+    final trackerParams = await MyTracker.trackerParams;
      
     // Устанавливаем пол
     await trackerParams.setAge(22);
@@ -157,47 +151,48 @@ Future setUserInfo() async
 ### Включение/выключение режима отладки
 Включение/выключение режима отладки производится через статические методы класса MyTracker.
 
+Включение/выключение режима отладки.  
+По умолчанию false.
 ```dart
 Future setDebugMode(boolean debugMode)
 ```
-Включение/выключение режима отладки.  
-По умолчанию false.
 
 ## Трекинг событий
 События можно отправлять через статические методы класса MyTracker.  
 Доступны следующие методы для трекинга различных типов событий:
 
-```dart 
-Future trackLoginEvent(String userId, Map<String, String>? eventParams)
-```
 Событие логина.  
 Обязательный параметр userId задаёт идентификатор пользователя.  
 Дополнительный параметр eventParams позволяет задать произвольные параметры ключ-значение для события.  
 Максимальная длина ключа и значения - 255 символов.
-
-```dart  
-Future trackRegistrationEvent(String userId, Map<String, String>? eventParams)
+```dart 
+Future trackLoginEvent(String userId, Map<String, String>? eventParams)
 ```
+
 Событие регистрации.  
 Обязательный параметр userId задаёт идентификатор пользователя.  
 Дополнительный параметр eventParams позволяет задать произвольные параметры ключ-значение для события.  
 Максимальная длина ключа и значения - 255 символов.
+```dart  
+Future trackRegistrationEvent(String userId, Map<String, String>? eventParams)
+```
 
+Произвольное событие с заданным именем.  
+Дополнительный параметр eventParams позволяет задать произвольные параметры ключ-значение для события.  
+Максимальная длина ключа и значения - 255 символов.
 ```dart 
 Future trackEvent(String name, Map<String, String>? eventParams)
 ```
-Произвольное событие с заданным именем.  
-Дополнительный параметр eventParams позволяет задать произвольные параметры ключ-значение для события.  
-Максимальная длина ключа и значения - 255 символов.  
+
 Например:
 ```dart 
 MyTracker.trackEvent("name", {"key_0": "value_0", "key_1": "value_1"});
 ```
 
+Принудительная отправка всех событий и сброс таймера отправки.
 ```dart 
 Future flush()
 ```
-Принудительная отправка всех событий и сброс таймера отправки.
 
 [license-svg]: https://img.shields.io/badge/license-LGPL-lightgrey.svg
 [license-link]: https://github.com/myTrackerSDK/mytracker-flutter/blob/master/LICENSE
