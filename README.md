@@ -109,7 +109,7 @@ Future<void> setForcingPeriod(int seconds)
 Отслеживание местоположения.  
 По умолчанию true.
 ```dart
-Future<MyTrackerConfig> setTrackingLocationEnabled(boolean trackingLocationEnabled)
+Future<void> setTrackingLocationEnabled(boolean trackingLocationEnabled)
 ```
 
 Установка региона сервера приёма данных.   
@@ -117,12 +117,12 @@ Future<MyTrackerConfig> setTrackingLocationEnabled(boolean trackingLocationEnabl
 * MyTrackerRegion.EU - Европа.
 * MyTrackerRegion.RU - РФ.
 ```dart
-Future<MyTrackerConfig> setRegion(MyTrackerRegion region)
+Future<void> setRegion(MyTrackerRegion region)
 ```
 
 Установка прокси-хоста сервера приёма данных.
 ```dart
-Future<MyTrackerConfig> setProxyHost(@Nullable String proxyHost)
+Future<void> setProxyHost(String proxyHost)
 ```
 
 #### MyTrackerParams
@@ -154,7 +154,7 @@ Future setUserInfo() async
 Включение/выключение режима отладки.  
 По умолчанию false.
 ```dart
-Future setDebugMode(boolean debugMode)
+Future<void> setDebugMode(boolean debugMode)
 ```
 
 ## Трекинг событий
@@ -166,7 +166,7 @@ Future setDebugMode(boolean debugMode)
 Дополнительный параметр eventParams позволяет задать произвольные параметры ключ-значение для события.  
 Максимальная длина ключа и значения - 255 символов.
 ```dart 
-Future trackLoginEvent(String userId, Map<String, String>? eventParams)
+Future<void> trackLoginEvent(String userId, Map<String, String>? eventParams)
 ```
 
 Событие регистрации.  
@@ -174,14 +174,14 @@ Future trackLoginEvent(String userId, Map<String, String>? eventParams)
 Дополнительный параметр eventParams позволяет задать произвольные параметры ключ-значение для события.  
 Максимальная длина ключа и значения - 255 символов.
 ```dart  
-Future trackRegistrationEvent(String userId, Map<String, String>? eventParams)
+Future<void> trackRegistrationEvent(String userId, Map<String, String>? eventParams)
 ```
 
 Произвольное событие с заданным именем.  
 Дополнительный параметр eventParams позволяет задать произвольные параметры ключ-значение для события.  
 Максимальная длина ключа и значения - 255 символов.
 ```dart 
-Future trackEvent(String name, Map<String, String>? eventParams)
+Future<void> trackEvent(String name, Map<String, String>? eventParams)
 ```
 
 Например:
@@ -191,7 +191,7 @@ MyTracker.trackEvent("name", {"key_0": "value_0", "key_1": "value_1"});
 
 Принудительная отправка всех событий и сброс таймера отправки.
 ```dart 
-Future flush()
+Future<void> flush()
 ```
 
 [license-svg]: https://img.shields.io/badge/license-LGPL-lightgrey.svg
