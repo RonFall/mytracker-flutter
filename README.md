@@ -63,8 +63,8 @@ dependencies:
 
 ```dart
 // При необходимости настраиваем параметры
-final trackerParams = await MyTracker.trackerParams;
-final trackerConfig = await MyTracker.trackerConfig;
+final trackerParams = MyTracker.trackerParams;
+final trackerConfig = MyTracker.trackerConfig;
 
 // ...
 // Настройка параметров трекера
