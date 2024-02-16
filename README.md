@@ -131,7 +131,7 @@ Future<void> setProxyHost(String proxyHost)
 Пользовательские параметры могут быть установлены в любой момент работы приложения.
 
 ```dart 
-Future setUserInfo() async
+Future<void> setUserInfo() async
 {
     final trackerParams = await MyTracker.trackerParams;
      
