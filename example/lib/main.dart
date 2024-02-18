@@ -5,7 +5,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Инициализация MyTracker
-  const sdkKey = '53362303610112658767';
+  const sdkKey = 'api_key';
   await MyTracker.setDebugMode(true);
   await MyTracker.trackerConfig.setBufferingPeriod(5);
   await MyTracker.init(sdkKey);
