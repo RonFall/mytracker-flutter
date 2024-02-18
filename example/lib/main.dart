@@ -10,7 +10,6 @@ Future<void> main() async {
   await MyTracker.init(sdkKey);
 
   await testConfig();
-
   runApp(const MyApp());
 }
 
